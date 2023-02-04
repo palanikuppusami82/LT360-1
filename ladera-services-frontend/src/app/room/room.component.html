@@ -1,0 +1,74 @@
+<div class="mat-card-conatiner">
+<mat-grid-list cols="3" rowHeight="470px">
+    <mat-grid-tile *ngFor="let room of rooms">
+<mat-card class="custom" style="width: 300px; margin-left: 60px;">
+  <mat-card-content>
+      <div fxLayout="row" fxLayoutAlign="space-between">
+          <div fxLayout="column" fxFlex="0 0 47%">
+                <p style="font-weight: 400;">Meeting Room Image</p>    
+          </div>
+          <div fxLayout="column" fxFlex="0 0 47%">
+                  <img mat-card-lg-image src="http://localhost:4200/assets/images/iocenters-2673328__340.jpg" >
+          </div>
+      </div>
+      <mat-divider></mat-divider>
+      <div fxLayout="row" fxLayoutAlign="space-between" style="margin-top: 9px;">
+          <div fxLayout="column" fxFlex="0 0 47%">
+            <div><p style="font-weight: 400;">Room Name</p></div>    
+            </div>
+          <div fxLayout="column" fxFlex="0 0 47%">
+                <p style="color:#FFBA00; font-weight: 600;" >{{room.roomName}}</p>
+        </div>
+      </div>
+      <mat-divider></mat-divider>
+      <div fxLayout="row" fxLayoutAlign="space-between" style="margin-top: 9px;">
+        <div fxLayout="column" fxFlex="0 0 47%">
+          <div><p style="font-weight: 400;">Building/floor </p></div>    
+          </div>
+        <div fxLayout="column" fxFlex="0 0 47%">
+              <p>DLF Block 2 Ground Floor</p>
+      </div>
+    </div>
+      <mat-divider></mat-divider>
+      <div fxLayout="row" fxLayoutAlign="space-between" style="margin-top: 9px;">
+        <div fxLayout="column" fxFlex="0 0 47%">
+          <div><p style="font-weight: 400;">Size</p></div>    
+          </div>
+        <div fxLayout="column" fxFlex="0 0 47%">
+              <p >{{room.roomType}}</p>
+      </div>
+    </div>
+      <mat-divider></mat-divider>
+      <div fxLayout="row" fxLayoutAlign="space-between" style="margin-top: 9px;">
+        <div fxLayout="column" fxFlex="0 0 47%">
+          <div><p style="font-weight: 400;">No. Of Seats</p></div>    
+          </div>
+        <div fxLayout="column" fxFlex="0 0 47%">
+              <p >{{room.seatCapacity}}</p>
+      </div>
+    </div>
+      <mat-divider></mat-divider>
+      <div fxLayout="row" fxLayoutAlign="space-between" style="margin-top: 9px;">
+        <div fxLayout="column" fxFlex="0 0 47%">
+          <div><p style="font-weight: 400;">Additonal Facilities</p></div>    
+          </div>
+        <div fxLayout="column" fxFlex="0 0 47%">
+              <p >{{room.additionalFacilities}}</p>
+      </div>
+    </div>
+      <mat-divider></mat-divider>
+      <div fxLayout="row" fxLayoutAlign="space-between" style="margin-top: 9px;">
+        <div fxLayout="column" fxFlex="0 0 47%">
+          <div><p style="font-weight: 400;">Reserve </p></div>    
+          </div>
+        <div fxLayout="column" fxFlex="0 0 47%">
+            <div fxLayout="row" fxFlex="0 0 30%" fxLayoutAlign="space-between center" style="margin-top: 9px;">
+                <button  mat-button (click)="gotoRoomBooking(room.roomName)">Book</button>
+            </div>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
+</mat-grid-tile>
+</mat-grid-list> 
+</div>

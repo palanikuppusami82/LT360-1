@@ -1,0 +1,110 @@
+<div class="wrapper">
+    <div class="form-left">
+        <h2 class="text-uppercase">information <br>
+        </h2>
+        <h3>
+            LADERA TECHNOLOGY PVT LTD is an emerging and global SAP implementation & services company.
+        </h3>
+        <p class="text">
+           We provide high-value strategic IT management consulting services and solutions. We are an SAP centre of excellence with focus on SAP enterprise software and solutions.</p>
+        <p class="text">
+            We have deep expertise and specialization in application management services, integrated business solutions, and enterprise mobility. We provide to our customers/partners, the highest level of quality and dependable cost-effective services with personalized service and support.
+        </p>
+        <div class="form-field">
+            <input type="submit" class="account" value="Have an Account?" (click)="router.navigate(['/login']);">
+        </div>
+    </div>
+    <form class="form-right" #registerform="ngForm" (ngSubmit)="registerEmployee()" [formGroup]="registerForm">
+        <h2 class="text-uppercase">Registration form</h2>
+        <div class="mb-3">
+            <label>Employee Id</label>
+            <input type="text" class="input-field" name="empId" required [(ngModel)]="employee.empId" [ngClass]="{ 'is-invalid': submitted && f['empId'].errors }"
+            formControlName="empId" >
+            <div *ngIf="submitted && f['empId'].errors" class="invalid-feedback">
+                <div *ngIf="f['empId'].errors['required']">EmployeeId is required</div>
+              </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 mb-3">
+                <label>First Name</label>
+                <input type="text" name="firstName" id="first_name" class="input-field" [(ngModel)]="employee.firstName"
+                [ngClass]="{ 'is-invalid': submitted && f['firstName'].errors }"
+                formControlName="firstName">
+                <div *ngIf="submitted && f['firstName'].errors" class="invalid-feedback">
+                <div *ngIf="f['firstName'].errors['required']">FirstName is required</div>
+              </div>
+            </div>
+            <div class="col-sm-6 mb-3">
+                <label>Last Name</label>
+                <input type="text" name="lastName" id="last_name" class="input-field" [(ngModel)]="employee.lastName"
+                [ngClass]="{ 'is-invalid': submitted && f['lastName'].errors }"
+                formControlName="lastName">
+                <div *ngIf="submitted && f['lastName'].errors" class="invalid-feedback">
+                <div *ngIf="f['lastName'].errors['required']">lastName is required</div>
+              </div>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label>Your Email</label>
+            <input type="email" class="input-field" name="emailId" required  [(ngModel)]="employee.emailId"
+            [ngClass]="{ 'is-invalid': submitted && f['emailId'].errors }"
+            formControlName="emailId" id="emailId">
+                <div *ngIf="submitted && f['emailId'].errors" class="invalid-feedback">
+                <div *ngIf="f['emailId'].errors['required']">EmailId is required</div>
+              </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 mb-3">
+                <label>Mobile Number</label>
+                <input type="tel" class="input-field" name="mobileNumber" required [(ngModel)]="employee.mobileNumber"
+                formControlName="mobileNumber" id="mobileNumber" [ngClass]="{ 'is-invalid': submitted && f['mobileNumber'].errors }">
+                <div *ngIf="submitted && f['mobileNumber'].errors" class="invalid-feedback">
+                <div *ngIf="f['mobileNumber'].errors['required']">MobileNumber is required</div>
+              </div>
+            </div>
+            <div class="col-sm-6 mb-3">
+                <label>Gender</label>
+                <select class="input-field" name="gender" [(ngModel)]="employee.gender"
+                formControlName="gender" id="gender" [ngClass]="{ 'is-invalid': submitted && f['gender'].errors }">
+                <option>Select</option>
+                <option value="MALE">MALE</option>
+                <option value="FEMALE">FEMALE</option>
+                </select>
+            <div *ngIf="submitted && f['gender'].errors" class="invalid-feedback">
+            <div *ngIf="f['gender'].errors['required']">Gender is required</div>
+          </div>
+            </div>
+        </div>
+       
+        <div class="row">
+            <div class="col-sm-6 mb-3">
+                <label>Password</label>
+                <input type="password" name="password" id="pwd" class="input-field"  [(ngModel)]="employee.password"
+                formControlName="pwd" [ngClass]="{ 'is-invalid': submitted && f['pwd'].errors }">
+                <div *ngIf="submitted && f['pwd'].errors" class="invalid-feedback">
+                    <div *ngIf="f['pwd'].errors['required']">Password is required</div>
+                  </div>
+            </div>
+            <div class="col-sm-6 mb-3">
+                <label>Confirm Password</label>
+                <input type="password" name="cpwd" id="cpwd" class="input-field"  
+                formControlName="cpwd" [ngClass]="{ 'is-invalid': submitted && f['cpwd'].errors }">
+                <div *ngIf="submitted && f['cpwd'].errors" class="invalid-feedback">
+                    <div *ngIf="f['cpwd'].errors['required']">Confrim password is required</div>
+                    <div *ngIf="f['cpwd'].errors['matching']">
+                        Confirm Password does not match
+                      </div>
+                  </div>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label class="option">I agree to the <a href="#">Terms and Conditions</a>
+                <input type="checkbox" checked>
+                <span class="checkmark"></span>
+            </label>
+        </div>
+        <div class="form-field">
+            <input type="submit" value="Register" class="register" name="register">
+        </div>
+    </form>
+</div>

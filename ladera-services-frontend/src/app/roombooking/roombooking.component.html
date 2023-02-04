@@ -1,0 +1,106 @@
+<div class ="form-container" style="background-image: url(http://localhost:4200/assets/images/form-background-img.jpg);">
+<div class="main-div" #maindiv>
+  <div class="col container" >
+<mat-card>
+  <mat-card-title class ="legend-title" style="color:#FFBA00 ;">Meeting Room Booking Form</mat-card-title>
+  <div class="row">
+    <div class="col col-md-8" style=" max-height: 100vh">
+      <form [formGroup]="roomBookingForm">
+        <div class="mb-3">
+          <label for="emailId" class="form-label">Email ID</label>
+          <input
+            type="text"
+            class="form-control"
+            id="emailId"
+            formControlName="emailId"
+            [ngClass]="{ 'is-invalid': submitted && f['emailId'].errors }"
+          />
+          <div *ngIf="submitted && f['emailId'].errors" class="invalid-feedback">
+            <div *ngIf="f['emailId'].errors['required']">Email is required</div>
+            <div *ngIf="f['emailId'].errors['emailId']">Email is invalid</div>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="discription" class="form-label">Booking Discription</label>
+          <input type="text"
+          class="form-control"
+          id="discription"
+          maxlength="100"
+          formControlName="discription" 
+          [ngClass]="{ 'is-invalid': submitted && f['discription'].errors }"
+          />
+          <div *ngIf="submitted && f['discription'].errors" class="invalid-feedback">
+            <div *ngIf="f['discription'].errors['required']">Discription is required</div>
+          </div>
+        </div>
+        <div class = "main-container-date-picker">
+        <div class="mb-4"  style="width: 75%; float:left">
+          <label for="bookingDate" class="form-label">Booking Date</label>
+          <input class="form-control "
+           type="text" 
+           id="picker" 
+           readonly 
+           [value]="startDate" 
+           formControlName="picker" 
+           placeholder="Choose a date"
+           [matDatepicker]="startPicker"
+           [max]="today"
+           [min]="today" 
+           (dateChange)="dateChangeHandler($event.value)"
+           [ngClass]="{ 'is-invalid': submitted && f['picker'].errors }"
+           /> 
+           <div *ngIf="submitted && f['picker'].errors" class="invalid-feedback">
+            <div *ngIf="f['picker'].errors['required']">booking date is required</div>
+          </div>
+        </div>
+           <div style="width: 25%; float: right;"><button mat-raised-button  (click)="startPicker.open()">Pick a Date</button>
+          <mat-datepicker #startPicker ></mat-datepicker>
+        </div>  
+        
+      </div>
+      
+      <br style="clear:both;"/>
+        <div>
+        <div class="ngb-timepicker-start" style="width: 40%; float:left">
+          <label for="starttime">Start Time</label>
+          <ngb-timepicker  id="starttime"  [(ngModel)]="startTime" (ngModelChange)="onStartTimeChange($event)" 
+          [ngClass]="{ 'is-invalid': submitted && f['starttime'].errors }" formControlName="starttime" 
+          ></ngb-timepicker>
+          <div *ngIf="submitted && f['starttime'].errors" class="invalid-feedback">
+            <div *ngIf="f['starttime'].errors['required']">starttime should not be empty</div>
+          </div>
+        </div>
+        <div class="ngb-timepicker-end" style="width: 60%; float:left">
+        <label for="endTime">End Time</label>
+        <ngb-timepicker id="endTime" [(ngModel)]="endTime" (ngModelChange)="onEndTimeChange($event)" 
+        [ngClass]="{ 'is-invalid': submitted && f['endTime'].errors }" formControlName="endTime"
+        ></ngb-timepicker>
+        <div *ngIf="submitted && f['endTime'].errors" class="invalid-feedback">
+          <div *ngIf="f['endTime'].errors['required']">endTime should not be empty</div>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+              <p *ngIf="hasError" class="clearfix error-message">
+                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> {{errMessage}}</p>
+    </div>
+      <br style="clear:both;"/>
+        <div>
+          <button type="submit" class="btn btn-primary btn-room" (click)="save()">Book Meeting Room</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</mat-card>
+</div>
+<div   class="col container-table">
+  <carousel
+[images]="carouselImages"
+[cellsToShow]="1"
+[loop]="true"
+[autoplay]="true"
+[autoplayInterval]="3000"
+class ="carousel-image"
+></carousel>
+  </div>
+</div>
+</div>
