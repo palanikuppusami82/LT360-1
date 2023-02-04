@@ -1,0 +1,84 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css";
+
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+/* Add application styles & imports to this file! */
+@import url('https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css');
+@import url('https://unpkg.com/ngx-bootstrap@5.5.0/datepicker/bs-datepicker.css');
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+body {
+    height: 100vh;
+  }
+
+  
+  mat-toolbar {
+    position: fixed;
+    min-height: 92px !important;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background: white;
+    box-shadow: 0 0 5px black;
+  }
+  
+  .mat-toolbar-row {
+    height: 64px !important;
+  }
+  
+  .app-icon-button {
+    font-size: 1.2em;
+    box-shadow: none;
+    user-select: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    filter: none;
+    font-weight: normal;
+    height: auto;
+    margin: 0;
+    min-width: 0;
+    padding: 0 14px 0 14px;
+    text-align: left;
+    text-decoration: none;
+    color: black;
+  }
+  
+  #toolbar-title {
+    font-size: 1.2em !important;
+    color: black;
+  }
+  
+  .mat-drawer-container {
+    position: absolute !important;
+    top: 92px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow-y: scroll;
+  }
+  
+  .mat-drawer-content {
+    padding: 25px;
+  }
+  
+  .btn-bl {
+    color: #fff;
+    background-color: #FFBA00;
+    border-color: #FFBA00;
+  }
+  
+  .btn-bl:hover {
+    color: #fff;
+    background-color: #FFBA00;
+    border-color: #FFBA00;
+  }
+  
+  .btn-bl.focus, .btn-bl:focus {
+    color: #fff;
+    box-shadow: 0 0 0 .2rem #FFBA00;
+  }
+  
