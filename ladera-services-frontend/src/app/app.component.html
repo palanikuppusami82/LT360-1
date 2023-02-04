@@ -1,0 +1,36 @@
+
+<nav class="navbar navbar-expand-sm bg-light navbar-light" *ngIf="!router.url.includes('admin')">
+    <a class="navbar-brand-image" href="#"><img src="assets/images/Logo-white-1.png"></a>    
+    <ul class="navbar-nav">
+      <ng-container *ngIf="currentUser">
+      <li class="nav-item active">
+         <a class="nav-link" routerLink="/home">Home</a>
+       </li>
+       <li class="nav-item">
+         <a class="nav-link" routerLink="/room">Rooms</a>
+       </li>
+       <li class="nav-item">
+       </li>
+      <li class="nav-item" >
+      <button (click)="openDialog()" class="btn btn-primary">Create Room</button>
+      <span class="example-spacer"></span>
+      <button mat-icon-button [matMenuTriggerFor]="userMenu">
+        <ngx-avatar size="40"name='{{currentUser.username}}'> </ngx-avatar>
+      </button>
+      <mat-menu #userMenu="matMenu">
+        <button mat-menu-item>
+          <mat-icon>person</mat-icon>
+          <span>Profile</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>exit_to_app</mat-icon>
+          <span (click)="logout()">Logout</span>    
+        </button>
+      </mat-menu>
+    </li>
+     </ng-container>
+     </ul>
+  </nav>
+<router-outlet></router-outlet>
+<app-footer></app-footer>
+
