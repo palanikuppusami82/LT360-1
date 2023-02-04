@@ -1,0 +1,88 @@
+<mat-sidenav-container>
+	<app-toolbar (navbarEventEmitter)="sidenav.toggle()"></app-toolbar>
+	<mat-sidenav #sidenav mode="side"  opened [disableClose]="true">
+		<app-sidenav></app-sidenav>
+	</mat-sidenav>
+	<router-outlet></router-outlet>
+	<div fxLayout="row wrap" fxLayoutAlign="space-around" *ngIf="showDashboardComponent">
+     <div class = "segment-container1">
+	<div class="mat-card-conatiner-lt1" style="width: 50%; float:left">
+	<mat-card  style="width: 520px; margin-left: 20px; height: 370px; margin: 15px;">
+		<mat-card-header>
+			<mat-card-title>Project Vendors</mat-card-title>
+		</mat-card-header>
+		<div id="chart-container">
+		<apx-chart
+		  [series]="organizationChartOptions.series"
+		  [chart]="organizationChartOptions.chart"
+		  [labels]="organizationChartOptions.labels"
+		  [responsive]="organizationChartOptions.responsive"
+		></apx-chart>	
+	  </div>
+	</mat-card>
+</div>
+<div class="mat-card-conatiner-lt2" style="width: 50%; float:right">
+	<mat-card  style="width: 520px; margin-left: 20px; height: 370px;margin: 15px ;">
+		<mat-card-header>
+			<mat-card-title>Asset Data</mat-card-title>
+		</mat-card-header>
+		
+		<div id="chart-container" >
+	<apx-chart
+	[series]="assetChartOptions.series"
+    [chart]="assetChartOptions.chart"
+    [dataLabels]="assetChartOptions.dataLabels"
+    [plotOptions]="assetChartOptions.plotOptions"
+    [yaxis]="assetChartOptions.yaxis"
+    [xaxis]="assetChartOptions.xaxis"
+    [stroke]="assetChartOptions.stroke"
+    [grid]="assetChartOptions.grid"
+    [fill]="assetChartOptions.fill"
+    [annotations]="assetChartOptions.annotations"
+		></apx-chart>	
+	  </div>
+	</mat-card>
+</div>
+</div>
+<div class = "segment-container1">
+	<div class="mat-card-conatiner-lt1" style="width: 50%; float:left">
+	<mat-card  style="width: 520px; margin-left: 20px; height: 370px;margin: 15px; ">
+		<mat-card-header>
+			<mat-card-title>Project Vendors</mat-card-title>
+		</mat-card-header>
+		<div id="chart-container">
+		<apx-chart
+		  [series]="organizationChartOptions.series"
+		  [chart]="organizationChartOptions.chart"
+		  [labels]="organizationChartOptions.labels"
+		  [responsive]="organizationChartOptions.responsive"
+		></apx-chart>	
+	  </div>
+	</mat-card>
+</div>
+<div class="mat-card-conatiner-lt2" style="width: 50%; float:right">
+	<mat-card  style="width: 520px; margin-left: 20px; height: 370px;margin: 15px;">
+		<mat-card-header>
+			<mat-card-title>Asset Data</mat-card-title>
+		</mat-card-header>
+		
+		<div id="chart-container" >
+	<apx-chart
+	[series]="assetChartOptions.series"
+    [chart]="assetChartOptions.chart"
+    [dataLabels]="assetChartOptions.dataLabels"
+    [plotOptions]="assetChartOptions.plotOptions"
+    [yaxis]="assetChartOptions.yaxis"
+    [xaxis]="assetChartOptions.xaxis"
+    [stroke]="assetChartOptions.stroke"
+    [grid]="assetChartOptions.grid"
+    [fill]="assetChartOptions.fill"
+    [annotations]="assetChartOptions.annotations"
+		></apx-chart>	
+	  </div>
+	</mat-card>
+</div>
+</div>
+</div>
+<br style="clear:both;"/>
+</mat-sidenav-container>

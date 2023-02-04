@@ -1,0 +1,21 @@
+mat-sidenav {
+    width: 200px;
+    background-color: #0a125a;  
+  }
+
+  #chart {
+    max-width: 380px;
+    margin: 35px auto;
+    padding: 0;
+  }
+  .mat-card-conatiner-lt1{
+    height: 40%;
+    width: 40%;
+   
+  }
+  .mat-card-conatiner-lt{
+    height: 40%;
+    width: 40%;
+   
+  }
+  

@@ -1,0 +1,120 @@
+
+<div class="asset-text-condition" *ngIf="!assetInfo">
+
+<div _ngcontent-qnl-c290="" class="no-user">
+    <div class="d-flex justify-content-center lt-box-asset">
+        <i class='fas fa-box fa-3x'></i>
+    </div>
+    <div class="d-flex justify-content-center xl-font fw-500 title-color pb-50 ng-star-inserted">
+       <span class="lt-noasset-txt">No Asset(s) Added</span>
+    </div>
+    <div class="lt-addasset-txt d-flex flex-wrap justify-content-center pb-2 1 "> Add asset to start monitoring and management through Portal.<br> Click 'Add Item' to begin. </div>
+    
+    <div class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
+        <button
+            type="button"
+            class="btn btn-primary me-2"
+            id="dropdownManual"
+            ngbDropdownAnchor
+            (focus)="myDrop.open()">
+        Add Items
+        </button>
+        <div class="lt-dropdown-menu" ngbDropdownMenu aria-labelledby="dropdownManual">
+            <button ngbDropdownItem data-toggle="modal" data-target="#content" (click)="openLg(content)">Single Asset</button>
+            <button ngbDropdownItem>Import from CSV</button>
+        </div>
+    </div>
+ </div>
+</div>
+<br style="clear:both;"/>
+ <ng-template #content let-modal>
+    
+	<div class="modal-header">
+		<h4 class="modal-title">Add Asset</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+	</div>
+	<div class="modal-body">  
+          <mat-horizontal-stepper [linear]="isLinear" #stepper>  
+            <mat-step [stepControl]="firstFormGroup">  
+              <form [formGroup]="firstFormGroup">  
+                <div>
+                <div class="container-lt-draganddrop" style="width: 40%; float:left">
+                    <label for="txtName">Product Image</label>
+                    <app-drag-drop></app-drag-drop>
+                    </div>
+                <ng-template matStepLabel>Define Asset</ng-template>  
+                <div class="side-field-container-draganddrop">
+                  <div class="row">
+                    <div class="col">
+                      <label for="Assetid">Asset Name*</label>
+                      <input type="text" class="form-control" id="Assetid" placeholder="Asset Name" aria-label="First name">
+                    </div>
+                    <div class="col">
+                      <label for="systemTypeId">Catagory</label>
+                      <input type="text" class="form-control" id = "systemTypeId" placeholder="Asset Catagory" aria-label="Last name">
+                    </div>
+                  </div>
+              </div>
+              </div>
+              </form>  
+            </mat-step>  
+            <mat-step [stepControl]="secondFormGroup" label="Fill out your address">  
+              <form [formGroup]="secondFormGroup">  
+                <mat-form-field>  
+                  <mat-label>Address</mat-label>  
+                  <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"  
+                         required>  
+                </mat-form-field>  
+                <div>  
+                  <button mat-button matStepperPrevious>Back</button>  
+                  <button mat-button matStepperNext>Next</button>  
+                </div>  
+              </form>  
+            </mat-step>  
+            <mat-step>  
+              <ng-template matStepLabel>Done</ng-template>  
+              <p>You are now done.</p>  
+              <div>  
+                <button mat-button matStepperPrevious>Back</button>  
+                <button mat-button (click)="stepper.reset()">Reset</button>  
+              </div>  
+            </mat-step>  
+          </mat-horizontal-stepper>  
+    </div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+	</div>
+</ng-template>
+<br style="clear:both;"/>
+<div class="card w-50">
+  <div class="card-body">
+      <div class ="checkbox-container" style="width: 20%;">
+      <input class="form-check-input-checkbox" type="checkbox" value="" id="flexCheckDefault">
+    </div>
+    <br style="clear:both;"/>
+    <div class ="title-container" style="width: 20%; float:left">
+      <span class="card-title">Laptop</span>
+    </div>
+      <div class="menu-nav" style="width: 20%;float:right">
+        <div class="dropdown-container" tabindex="-1">
+          <div class="three-dots"></div>
+          <div class="dropdown">
+            <a href="#"><div>Edit</div></a>
+            <a href="#"><div>Delete</div></a>
+          </div>
+        </div>
+      </div>
+
+    <div class ="type-container">
+    <span><i class='fa fa-globe'></i>
+      <span class="border-right mx-75">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;#  Firewall</span>
+    </div>
+    <div>
+      #ASSET00003
+    </div>
+      <div class="group-lists flex-wrap d-flex align-items-center justify-content-start"><div class="custom-squre bg-warning"></div><span placement="top" container="body" class="mr-50 sm-font fw-500"> Allocation </span>
+      <div class="right-arrow custom-text sm-font fw-500" style="background-color: rgba(172, 103, 240, 0.12); color: rgb(172, 103, 240);"> Deploy </div></div>
+
+  <i style='font-size:24px' class='fas custom-fas'>&#xf109;</i>
+  </div>
+</div>

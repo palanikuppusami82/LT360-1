@@ -1,0 +1,50 @@
+<form [formGroup]="employeeapproval">
+<div class="example-container mat-elevation-z8">
+    <mat-table #table [dataSource]="dataSource">
+  
+ 
+      <ng-container matColumnDef="EmployeeId">
+        <mat-header-cell *matHeaderCellDef> EmployeeId </mat-header-cell>
+        <mat-cell *matCellDef="let element" [innerHTML]="element.empId"></mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="FirstName">
+        <mat-header-cell *matHeaderCellDef> FirstName </mat-header-cell>
+        <mat-cell *matCellDef="let element" [innerHTML]="element.firstName"></mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="EmailId">
+        <mat-header-cell *matHeaderCellDef> EmailId </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.emailId}} </mat-cell>
+      </ng-container>
+  
+       <ng-container matColumnDef="Roles">
+        <mat-header-cell *matHeaderCellDef> Roles </mat-header-cell>
+        <mat-cell *matCellDef="let element; let i = index"> 
+          <mat-form-field>
+            <mat-select  [formControl]="myControls[i]" multiple>
+              <mat-option *ngFor="let roles of rolesList" [value]="roles.role" >{{roles.role}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-cell>
+      </ng-container>
+
+       <ng-container matColumnDef="Is-Active">
+        <mat-header-cell *matHeaderCellDef> Is-Active </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <mat-checkbox></mat-checkbox>  
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Update">
+        <mat-header-cell *matHeaderCellDef> Update </mat-header-cell>
+        <mat-cell *matCellDef="let element; let ind = index">
+          <button type="submit" class="btn btn-primary btn-approve" (click)="updateEmployee(element,ind)">Approve</button>
+        </mat-cell>
+      </ng-container>
+  
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </div>
+</form>

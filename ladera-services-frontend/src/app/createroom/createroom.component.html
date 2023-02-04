@@ -1,0 +1,100 @@
+<div class ="form-container" style="background-image: url(http://localhost:4200/assets/images/form-background-img.jpg);">
+  <div class="main-div" #maindiv>
+    <div class="col container" >
+  <mat-card>
+    <mat-card-title class ="legend-title" style="color:#FFBA00 ;">Room Form</mat-card-title>
+    <div class="row">
+      <div class="col col-md-8" style=" max-height: 100vh">
+        <form [formGroup]="roomCreateForm"  #registerform="ngForm" (ngSubmit)="registerRoom()" >
+          <div class="row">
+          <div class=" col-sm-4 mb-3">
+            <label for="roomId" class="form-label">Room Code</label>
+            <input
+              type="text"
+              class="form-control"
+              id="roomId"
+              [(ngModel)]="room.roomId"
+              formControlName="roomId"
+              [ngClass]="{ 'is-invalid': submitted && f['roomId'].errors }"
+            />
+            <div *ngIf="submitted && f['roomId'].errors" class="invalid-feedback">
+              <div *ngIf="f['roomId'].errors['required']">Room Code is required</div>
+            </div>
+          </div>
+          <div class=" col-sm-4 mb-3">
+            <label for="roomName" class="form-label">Room Name</label>
+            <input type="text"
+            class="form-control"
+            id="roomName"
+            maxlength="100"
+            [(ngModel)]="room.roomName"
+            formControlName="roomName" 
+            [ngClass]="{ 'is-invalid': submitted && f['roomName'].errors }"
+            />
+            <div *ngIf="submitted && f['roomName'].errors" class="invalid-feedback">
+              <div *ngIf="f['roomName'].errors['required']">Discription is required</div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class=" col-sm-4 mb-3">
+            <label for="roomId" class="form-label">Room Description</label>
+            <input
+              type="text"
+              class="form-control"
+              id="roomId"
+              [(ngModel)]="room.description"
+              formControlName="description"
+              [ngClass]="{ 'is-invalid': submitted && f['description'].errors }"
+            />
+          </div>
+          <div class=" col-sm-4 mb-3">
+            <label for="seatCapacity" class="form-label">Room Size</label>
+            <input type="text"
+            class="form-control"
+            id="seatCapacity"
+            maxlength="100"
+            [(ngModel)]="room.seatCapacity"
+            formControlName="seatCapacity" 
+            [ngClass]="{ 'is-invalid': submitted && f['seatCapacity'].errors }"
+            />
+            <div *ngIf="submitted && f['seatCapacity'].errors" class="invalid-feedback">
+              <div *ngIf="f['seatCapacity'].errors['required']">Size is required</div>
+            </div>
+          </div>
+        </div>
+        
+        <br style="clear:both;"/>
+          <div>
+          <div class="ngb-timepicker-end" style="width: 60%; float:left">
+          <label for="roomType">Room Type</label>
+          <select class="input-field" name="roomType" [(ngModel)]="room.roomType"
+                formControlName="roomType" id="roomType" [ngClass]="{ 'is-invalid': submitted && f['roomType'].errors }">
+                <option>Select</option>
+                <option value="SMALL">SMALL</option>
+                <option value="MEDIUM">MEDIUM</option>
+                <option value="LARGE">LARGE</option>
+                </select>
+          <div *ngIf="submitted && f['roomType'].errors" class="invalid-feedback">
+            <div *ngIf="f['roomType'].errors['required']">Room Type should not be empty</div>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+                <p *ngIf="hasError" class="clearfix error-message">
+                  <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> {{errMessage}}</p>
+      </div>
+        <br style="clear:both;"/>
+          <div>
+            <button type="submit" class="btn btn-primary btn-room" >Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </mat-card>
+  </div>
+  <div   class="col container-table">
+    
+    </div>
+  </div>
+  </div>
+  

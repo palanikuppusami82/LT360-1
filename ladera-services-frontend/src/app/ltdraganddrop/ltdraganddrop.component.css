@@ -1,0 +1,92 @@
+* {
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+    padding: 25px 0 0 0;
+    background: #291464;
+}
+.container {
+    margin-top: 30px;
+    max-width: 500px;
+}
+.progress {
+    margin-bottom: 30px;
+}
+.fileupload {
+
+    border: dashed 1px #0d51d9;
+    background-color: #0d51d90d!important;
+    position: relative;
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    padding: 20px;
+    border-radius: 10px;
+    color: #444;
+    cursor: pointer;
+    width: 350px;
+ }
+.ddinfo {
+    display: block;
+    text-align: center;
+    padding-top: 130px;
+    color: #0d51d9!important;
+}
+.image-list {
+    display: flex;
+    width: 100%;
+    background: #C2DFFC;
+    border: 1px solid;
+    border-radius: 3px;
+    padding: 10px 10px 10px 15px;
+    margin-bottom: 10px;
+}
+.image-list p {
+    line-height: normal;
+    padding: 0;
+    margin: 0 0 0 14px;
+    display: inline-block;
+    position: relative;
+    top: -2px;
+    color: #150938;
+    font-size: 14px;
+}
+.message {
+    text-align: center;
+    color: #C2DFFC;
+}
+.remove {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+.profile {
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+    border-radius: 4px;
+    display: inline-block;
+}
+.profile img {
+    width: 100%;
+}
+.remove img {
+    width: 15px;
+    position: relative;
+    top: -2px;
+}
+.fileUploadWrapper .card-body {
+    max-height: 330px;
+    overflow: hidden;
+    overflow-y: auto;
+}
+@media(max-width: 767px) {
+    .container {
+        width: 280px;
+        margin: 20px auto 100px;
+    }
+}
