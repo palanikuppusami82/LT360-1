@@ -26,6 +26,7 @@ public class Wings {
 	private int wingCapacity;
 	
 	
+	
 
 	public long getId() {
 		return id;

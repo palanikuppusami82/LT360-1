@@ -1,6 +1,8 @@
 package com.ladera.service.impl;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -16,12 +18,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.ladera.model.Employee;
+import com.ladera.model.Room;
 import com.ladera.model.WingSlotEntries;
 import com.ladera.model.Wings;
 import com.ladera.model.data.WingSlotEntriesData;
 import com.ladera.repository.UserRepository;
 import com.ladera.repository.WingSlotsRepository;
 import com.ladera.repository.WingsRepository;
+import com.ladera.request.payload.RoomData;
 import com.ladera.request.payload.WingCreationRequest;
 import com.ladera.service.WingService;
 
@@ -50,6 +54,7 @@ public class DefaultWingService implements WingService {
 		Collection<Employee> employeeWithOutSeat  = userRepository.findUsersWithNoSeatAllocated();
 		Map<String, String> employeeWithOutSeatMap =  new HashedMap<>();
 	    CollectionUtils.emptyIfNull(employeeWithOutSeat).forEach(e-> employeeWithOutSeatMap.put(e.getEmpId(), e.getEmailId()));
+	    int availSize = 0;
 		if (CollectionUtils.isNotEmpty(wingSlotList)) {
 			for (WingSlotEntries slot : wingSlotList) {
 				if (StringUtils.isEmpty(slotData.getWingCode())) {
@@ -58,8 +63,14 @@ public class DefaultWingService implements WingService {
 					slotData.setWingCode(slot.getWings().getWingCode());
 				}
 				slotIdAndStatusMap.put(slot.getSeatNumber(), slot.getStatus());
+				if(!StringUtils.equals("available", slot.getStatus())) {
+					availSize++;	
+				}
+				
 			}
+			slotData.setAvailableCapacity(availSize);
 			slotData.setSeatNumber(slotIdAndStatusMap);
+			
 			slotData.setUnAssignedEmployeeMap(employeeWithOutSeatMap);
 			return slotData;
 		}
@@ -89,6 +100,19 @@ public class DefaultWingService implements WingService {
 		}
 		return ResponseEntity.status(HttpStatus.CREATED).body("Wing Created Successfully");
 
+	}
+
+	@Override
+	public List<WingSlotEntriesData> getAllWings() {
+		List<WingSlotEntriesData> slotData = new ArrayList<WingSlotEntriesData>();
+		Collection<Wings> wingsList = wingsRepository.findAll();
+		if (CollectionUtils.isNotEmpty(wingsList)) {
+			for (Wings slot : wingsList) {
+				slotData.add(getWingSlotsById(slot.getWingCode()));
+			}
+			
+		}
+		return slotData;
 	}
 
 }

@@ -22,17 +22,17 @@
             </div>
           </div>
           <div class=" col-sm-4 mb-3">
-            <label for="roomName" class="form-label">Room Name</label>
+            <label for="name" class="form-label">Room Name</label>
             <input type="text"
             class="form-control"
             id="roomName"
             maxlength="100"
-            [(ngModel)]="room.roomName"
-            formControlName="roomName" 
-            [ngClass]="{ 'is-invalid': submitted && f['roomName'].errors }"
+            [(ngModel)]="room.name"
+            formControlName="name" 
+            [ngClass]="{ 'is-invalid': submitted && f['name'].errors }"
             />
-            <div *ngIf="submitted && f['roomName'].errors" class="invalid-feedback">
-              <div *ngIf="f['roomName'].errors['required']">Discription is required</div>
+            <div *ngIf="submitted && f['name'].errors" class="invalid-feedback">
+              <div *ngIf="f['name'].errors['required']">Discription is required</div>
             </div>
           </div>
         </div>

@@ -1,6 +1,6 @@
 export class Room {
     public roomId?:string;
-    public roomName? : string;
+    public name? : string;
     public description? : string;
     public buttonStr?   : string;
     public imagePath? : string;

@@ -26,6 +26,10 @@ createwing(creationRequest:WingSeatAllotment){
 
 getSlots(wingCode: string){
   return this.http.get(`${environment.baseurl}api/wings/getwingslot/${wingCode}`,this.httpOptions)
-}   
+}  
+
+getAllWings(){
+  return this.http.get(`${environment.baseurl}api/wings/getAllWings`,this.httpOptions)
+} 
 
 }

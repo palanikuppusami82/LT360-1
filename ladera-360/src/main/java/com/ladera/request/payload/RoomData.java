@@ -17,6 +17,13 @@ public class RoomData {
 
 	@NotBlank
 	private String size;
+	@Override
+	public String toString() {
+		return "RoomData [roomId=" + roomId + ", name=" + name + ", size=" + size + ", description=" + description
+				+ ", seatCapacity=" + seatCapacity + ", roomType=" + roomType + ", additionalFacilities="
+				+ additionalFacilities + "]";
+	}
+
 	@NotBlank
 
 	public String description;
@@ -41,11 +48,11 @@ public class RoomData {
 		return seatCapacity;
 	}
 
-	public String getRoomName() {
+	public String getName() {
 		return name;
 	}
 
-	public void setRoomName(String name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 

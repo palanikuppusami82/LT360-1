@@ -1,6 +1,6 @@
 <div class="mat-card-conatiner">
 <mat-grid-list cols="3" rowHeight="470px">
-    <mat-grid-tile *ngFor="let room of rooms">
+<mat-grid-tile *ngFor="let room of rooms">
 <mat-card class="custom" style="width: 300px; margin-left: 60px;">
   <mat-card-content>
       <div fxLayout="row" fxLayoutAlign="space-between">
@@ -17,7 +17,7 @@
             <div><p style="font-weight: 400;">Room Name</p></div>    
             </div>
           <div fxLayout="column" fxFlex="0 0 47%">
-                <p style="color:#FFBA00; font-weight: 600;" >{{room.roomName}}</p>
+                <p style="color:#FFBA00; font-weight: 600;" >{{room.name}}</p>
         </div>
       </div>
       <mat-divider></mat-divider>
@@ -63,7 +63,7 @@
           </div>
         <div fxLayout="column" fxFlex="0 0 47%">
             <div fxLayout="row" fxFlex="0 0 30%" fxLayoutAlign="space-between center" style="margin-top: 9px;">
-                <button  mat-button (click)="gotoRoomBooking(room.roomName)">Book</button>
+                <button  mat-button (click)="gotoRoomBooking(room.roomId)">Book</button>
             </div>
       </div>
     </div>
