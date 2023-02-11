@@ -15,4 +15,6 @@ public interface WingSlotsRepository extends JpaRepository<WingSlotEntries, Long
 	@Query("SELECT e FROM WingSlotEntries as e JOIN e.wings as ws WHERE ws.wingCode = :wingCode")
 	public Collection<WingSlotEntries> getWingById(@Param("wingCode")String wingCode);
 
+	
+	public WingSlotEntries findBySeatNumber(String seatNumber);
 }

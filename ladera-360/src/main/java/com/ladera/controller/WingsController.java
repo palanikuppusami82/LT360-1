@@ -39,9 +39,17 @@ public class WingsController {
 		return wingService.getWingSlotsById(wingCode);
 	}
 	
+
 	@GetMapping("getAllWings")
 	public List<WingSlotEntriesData> getAllWings() {
 		return wingService.getAllWings();	
 	}
+
+	@PostMapping("assignseat/employee/{selectedEmployee}/{selectedSeatNumber}")
+	public ResponseEntity<?> allotSeatForEmployee(@PathVariable String selectedEmployee, @PathVariable String selectedSeatNumber) {
+		logger.info("Allocating Seat for Employee: {}, seat {}", selectedEmployee, selectedSeatNumber);
+		return wingService.allotSeatForEmployee(selectedEmployee, selectedSeatNumber);
+	}
+
 
 }

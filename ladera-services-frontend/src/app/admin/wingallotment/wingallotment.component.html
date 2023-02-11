@@ -15,98 +15,49 @@
             <input type="text" class="form-control" [readonly]="true"  [ngModel]="slot.wingCapacity" [ngModelOptions]="{standalone: true}">
         </div>
       </div>  
+      
       <div class="row row-margin-05">
-        <div class="col-2">
-            <form class="form">
-              <mat-form-field class="width">
-                <input
-                  matInput
-                  placeholder="EmployeeId"
-                  aria-label="EmployeeId"
-                  [matAutocomplete]="auto"
-                  [formControl]="empId"
-                  required
-                />
-                <mat-autocomplete #auto="matAutocomplete">
-                  <mat-option
-                    *ngFor="let employeeId of employeeIds"
-                    [value]="employeeId"
-                  >
-                    <span>{{employeeId}}</span>
-                  </mat-option>
-                </mat-autocomplete>
-              </mat-form-field>
-            </form>
+     <div class="col-2">
+          <label>EmployeeId*</label>
+          <ng-select [items]=banks
+          bindLabel="employeeCode"
+          placeholder="EmployeeId"
+          [(ngModel)]="selectedEmployee"
+          (change)="onChangeEvent($event)"
+          >
+         </ng-select>
+         <div *ngIf="blankEmp">
+          Employee Should not be null
+        </div>
         </div>
         <div class="col-3">
             <label>Email ID</label>
-          <input type="text" class="form-control" [readonly]="true">
+          <input type="text" class="form-control" [readonly]="true" [ngModel]="selectedEmployeeEmail" [ngModelOptions]="{standalone: true}">
         </div>
         <div class="col-4">
-            <label>Selected Seat Number</label>
-          <input type="text" class="form-control" [readonly]="true">
+            <label>Selected Seat Number*</label>
+          <input type="text" class="form-control" [readonly]="true" [ngModel]="selectedSeatNumber" [ngModelOptions]="{standalone: true}">
+          <div *ngIf="blankSeat">
+           Please select seat</div>
         </div>
-      </div>
+      </div>      
       <div class="row row-margin-05">
     <div class="form-field">
-        <input type="submit" value="Allot Seat" class="register" name="register">
+      <input class="btn btn-primary" type="submit" value="Submit" (click)="allotSeatForEmployee()">
     </div>
 </div>
 </form>
 <hr width="75%" />
-<div class="overall-table-seat-container" style="margin-top: 30px;">
-<div class="seat-container-table-1" style="width: 30%; float:left">
-        <table >
-          <tbody>
-          <tr>
-         <td class="cell-style row-name">R1</td>
-          <td class="cell-style td-seat" (click)="sample()"></td>
-          <td class="cell-style td-seat"></td>
-          <td class="cell-style td-seat"></td>
-          <td class="cell-style td-seat"></td>
-          <td class="cell-style td-seat"></td>
-          </tr>
-          <tr>
-            <td class="cell-style row-name">R2</td>
-            <td class="cell-style td-seat" (click)="sample()"></td>
-            <td class="cell-style td-seat"></td>
-            <td class="cell-style td-seat"></td>
-            <td class="cell-style td-seat"></td>
-            <td class="cell-style td-seat"></td>
-            </tr>
-            <tr>
-              <td class="cell-style row-name">R3</td>
-              <td class="cell-style td-seat"></td>
-              <td class="cell-style td-seat"></td>
-              <td class="cell-style td-seat"></td>
-              <td class="cell-style td-seat"></td>
-              <td class="cell-style td-seat"></td>
-              </tr> 
-          </tbody>
-          </table>
-    </div>
-
-    <div class="seat-container-table-1" style="width:30%; float:left">
-      <table >
-        <tbody>
-        <tr>
-       <td class="cell-style row-name">R4</td>
-        <td class="cell-style td-seat" onclick= sample()></td>
-        <td class="cell-style td-seat"></td>
-        <td class="cell-style td-seat"></td>
-        <td class="cell-style td-seat"></td>
-        <td class="cell-style td-seat"></td>
-        </tr>
-        <tr>
-          <td class="cell-style row-name">R5</td>
-          <td class="cell-style td-seat" onclick="sample()"></td>
-          <td class="cell-style td-seat"></td>
-          <td class="cell-style td-seat"></td>
-          <td class="cell-style td-seat"></td>
-          <td class="cell-style td-seat"></td>
-          </tr>
-        </tbody>
-        </table>
-  </div>
-
-  </div>
+<table id="tableID">
+  <div class="row row-seat" >
+    <tr class="col-3-seat" *ngFor="let rowdata of seats; let ind= index" (click)="sample(ind)">
+      <div *ngIf="rowdata.seatStatus==='occupied'; else available">
+        <td class="cell-style td-seat col-1" id= {{rowdata.seatCode}} [class.phase-taken]="true"></td>
+      </div>
+    <ng-template #available>
+   <td class="cell-style td-seat col-1" id= {{rowdata.seatCode}} [class.phase-active]="activeSeat === ind"></td>
+  </ng-template>
+     </tr>
+</div>
+</table>
+ 

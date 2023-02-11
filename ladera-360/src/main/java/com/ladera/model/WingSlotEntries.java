@@ -19,7 +19,7 @@ public class WingSlotEntries {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "seat_entry_seq")
 	private long id;
 	
-	@Column(name = "seat_number")
+	@Column(name = "seat_number",unique = true)
 	private String seatNumber;
 
 	@Column(name = "lan_port")

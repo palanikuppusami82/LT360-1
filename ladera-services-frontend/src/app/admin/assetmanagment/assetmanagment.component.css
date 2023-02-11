@@ -135,7 +135,7 @@ input[type=checkbox]{
        
     display: flex;
     justify-content: end;
-    margin-top: -42px;
+    margin-top: -22px;
   }
   
   .menu-item {
@@ -190,7 +190,7 @@ input[type=checkbox]{
     padding-left: 90%;
 }
  .title-container{
-  margin-top: -41px;
+  margin-top: -22px;
      margin-left: 20px;
      font-weight: 400;
      font-size: large;
@@ -199,6 +199,9 @@ input[type=checkbox]{
   margin-top: 25px;
  }
  .type-container{
-  margin-top: 25px;
-
- }
+  margin-top: 6px;
+  margin-left: 20px;
+}
+.card{
+  background-color: #fff !important;;
+}

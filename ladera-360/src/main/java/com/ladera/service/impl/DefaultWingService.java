@@ -3,8 +3,9 @@ package com.ladera.service.impl;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.Objects;
 
 import javax.transaction.Transactional;
 
@@ -49,7 +50,7 @@ public class DefaultWingService implements WingService {
 	public WingSlotEntriesData getWingSlotsById(String wingCode) {
 
 		WingSlotEntriesData slotData = new WingSlotEntriesData();
-		Map<String, String> slotIdAndStatusMap = new HashedMap<>();
+		Map<String, String> slotIdAndStatusMap = new LinkedHashMap<>();
 		Collection<WingSlotEntries> wingSlotList = wingSlotsRepository.getWingById(wingCode);
 		Collection<Employee> employeeWithOutSeat  = userRepository.findUsersWithNoSeatAllocated();
 		Map<String, String> employeeWithOutSeatMap =  new HashedMap<>();
@@ -113,6 +114,18 @@ public class DefaultWingService implements WingService {
 			
 		}
 		return slotData;
-	}
 
+
+}
+	public ResponseEntity<?> allotSeatForEmployee(String selectedEmployee, String selectedSeatNumber) {
+		WingSlotEntries entries =   wingSlotsRepository.findBySeatNumber(selectedSeatNumber);
+		Employee employee = userRepository.findByEmpId(selectedEmployee);
+		if(Objects.isNull(entries)) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Unable to find given seatnumber.." + selectedSeatNumber);
+		}
+		 entries.setEmployee(employee);
+		 entries.setStatus("occupied");
+		return ResponseEntity.status(HttpStatus.CREATED).body("Seat alloted to employee" + "selectedSeatNumber");
+
+	}
 }

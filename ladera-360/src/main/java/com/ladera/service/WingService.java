@@ -10,8 +10,11 @@ import com.ladera.request.payload.WingCreationRequest;
 public interface WingService {
 
 	public WingSlotEntriesData getWingSlotsById(String wingCode);
-	
-	public  ResponseEntity<?> createWingForRequest(WingCreationRequest creationRequest);
-	
+
+	public ResponseEntity<?> createWingForRequest(WingCreationRequest creationRequest);
+
 	public List<WingSlotEntriesData> getAllWings();
+
+	public ResponseEntity<?> allotSeatForEmployee(String selectedEmployee, String selectedSeatNumber);
+
 }

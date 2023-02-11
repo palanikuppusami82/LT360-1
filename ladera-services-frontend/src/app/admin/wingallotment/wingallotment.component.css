@@ -1,3 +1,6 @@
+body {
+  padding: 20px;
+}
 .row-margin-05 { margin-top: 1em;}
 
 .cell-style{
@@ -20,3 +23,29 @@
   font-size: large   !important;
   font: 200 !;
   }
+
+  .row-seat {
+    --bs-gutter-x: -47.5rem !important;
+    --bs-gutter-y: 0;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: calc(-1 * var(--bs-gutter-y));
+    margin-right: calc(-.5 * var(--bs-gutter-x));
+    margin-left: calc(-.5 * var(--bs-gutter-x));
+    margin-left: 0%;
+
+}
+
+.col-3-seat {
+  flex: 0 0 auto;
+  width: 13%;
+}
+
+.phase-active{
+  background-image: url('http://localhost:4200/assets/images/selected.png');
+}
+
+.phase-taken{
+  background-image: url('http://localhost:4200/assets/images/taken.png');
+}
+

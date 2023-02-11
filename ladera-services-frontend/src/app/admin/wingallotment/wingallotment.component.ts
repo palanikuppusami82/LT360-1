@@ -1,75 +1,185 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl} from '@angular/forms';
-import { Observable } from 'rxjs';
 import { SeatInfo } from 'src/app/model/SeatInfo';
 import { WingserviceService } from 'src/app/services/wingservice.service';
 import { AdminComponent } from '../admin.component';
-import { map, startWith } from 'rxjs/operators';
+import { AfterViewInit, OnDestroy, ViewChild } from '@angular/core';
+import {  ReplaySubject, Subject, take, takeUntil } from 'rxjs';
+import { MatInput } from '@angular/material/input';
+
+export interface EmployeeContainer {
+  employeeCode: string;
+}
+
+export interface SeatContainer {
+  seatCode: string;
+  seatStatus:string;
+}
+
+export interface dataContainer {
+    columnCode:string
+    columnData:SeatContainer[]
+}
 
 @Component({
   selector: 'app-wingallotment',
   templateUrl: './wingallotment.component.html',
   styleUrls: ['./wingallotment.component.css']
 })
-export class WingallotmentComponent implements OnInit {
+export class WingallotmentComponent implements OnInit, AfterViewInit, OnDestroy {
 
-  employeeDropDown!: any[];
+  selectedEmployee: any;
+
   public slot!: SeatInfo;
   empId!: FormControl;
-  ngSeatModel:SeatInfo | undefined;
    map = new Map<string, string>();
-   filteredEmployee: Observable<any[]>;
+   public banks: EmployeeContainer[] = []
+   seatmap = new  Map<string, string>();
+   public seats: SeatContainer[] = []
+ selectedSeatNumber!:string;
+ selectedEmployeeEmail!:string;
+ activeSeat
+ imageName!: String
+ blankEmp!:boolean
+ blankSeat!:boolean
 
+   /** control for the selected bank */
+public bankCtrl: FormControl = new FormControl();
+
+/** control for the MatSelect filter keyword */
+public bankFilterCtrl: FormControl = new FormControl();
+
+/** list of banks filtered by search keyword */
+  public filteredBanks: ReplaySubject<EmployeeContainer[]> = new ReplaySubject<EmployeeContainer[]>(1);
+
+@ViewChild('singleSelect') singleSelect: MatInput | undefined;
+
+/** Subject that emits when the component has been destroyed. */
+protected _onDestroy = new Subject<void>();
   constructor(private adminComponent : AdminComponent, private wingService:WingserviceService){
     this.adminComponent.showDashboardComponent=false;
     this.empId = new FormControl();
-    this.filteredEmployee = this.empId.valueChanges.pipe(
-      startWith(''),
-      map((employeeId) =>
-      employeeId ? this.filterEmployee(employeeId) : this.employeeDropDown.slice()
-      )
-    );
-    
   }
 
   ngOnInit(): void {
-    this.wingService.getSlots('WT-001').subscribe((data:any) =>{
+    let  result : EmployeeContainer[] = [];
+    let  seatarray : SeatContainer[] = [];
+    //this.imageName=""
+    this.wingService.getSlots('wing7').subscribe((data:any) =>{
      this.slot=data;
      this.map  = this.slot.unAssignedEmployeeMap;
-     console.log(this.slot.unAssignedEmployeeMap);
-     Object.keys(this.map).forEach( (key) =>{
-      var keyvalue = this.map[key]
-    this.employeeDropDown.push(keyvalue);
-  });
+     Object.keys(this.map).forEach( (value) =>{
+     result.push({employeeCode: value})
+     this.banks = result;
+     });
+     this.seatmap =this.slot.seatNumber;
+     for (const [key, value] of Object.entries(this.seatmap)) {
+      seatarray.push({
+        seatCode: key,
+        seatStatus: value,
+      })    
+    }
+    console.log(this.map);
+  
+      this.seats=seatarray;
+      console.log(this.seats);
   });  
-   
-  this.empId.valueChanges.subscribe(value => {
-    startWith(''),
-    map((value) =>
-    value ? this.filterEmployee(value) : this.employeeDropDown.slice()
-    )
-  });
 
+ // set initial selection
+ this.bankCtrl.setValue(this.banks[10]);
+
+ // load the initial bank list
+ this.filteredBanks.next(this.banks.slice());
+
+ // listen for search field value changes
+ this.bankFilterCtrl.valueChanges
+   .pipe(takeUntil(this._onDestroy))
+   .subscribe(() => {
+     this.filterBanks();
+   });
+}
+ngAfterViewInit() {
+ this.setInitialValue();
+}
+
+ngOnDestroy() {
+ this._onDestroy.next();
+ this._onDestroy.complete();
+}
+
+public sample(ind) {
+  if(this.seats[ind].seatStatus!=='occupied'){
+  if(this.activeSeat===ind){
+    this.activeSeat="";
+    this.selectedSeatNumber="";
+    return;
+  }
+  this.blankSeat=false;
+  this.activeSeat=ind;
+  this.selectedSeatNumber = this.seats[ind].seatCode
+}
+return;
+  //this.imageName = "http://localhost:4200/assets/images/selected.png"
+}
+
+  /**
+ * Sets the initial value after the filteredBanks are loaded initially
+ */
+protected setInitialValue() {
+  this.filteredBanks
+    .pipe(take(1), takeUntil(this._onDestroy))
+    .subscribe(() => {
+      // setting the compareWith property to a comparison function
+      // triggers initializing the selection according to the initial value of
+      // the form control (i.e. _initializeSelection())
+      // this needs to be done after the filteredBanks are loaded initially
+      // and after the mat-option elements are available
+      //this.singleSelect.compareWith = (a: EmployeeContainer, b: EmployeeContainer) => a && b && a.employeeCode === b.employeeCode;
+    });
+}
+
+protected filterBanks() {
+  if (!this.banks) {
+    return;
+  }
+  // get the search keyword
+let search = this.bankFilterCtrl.value;
+ 
+  if (!search) {
+    this.filteredBanks.next(this.banks.slice());
+    return;
+  } else {
+    search = search.toLowerCase();
+  }
+  // filter the banks
+  this.filteredBanks.next(
+    this.banks.filter(bank => bank.employeeCode.toLowerCase().indexOf(search) > -1)
+  );
+}
+  onChangeEvent(event){
+    if(event==undefined){
+      this.selectedEmployeeEmail="";
+    }
+    this.selectedEmployee = event.employeeCode
+    for (const [key, value] of Object.entries(this.map)) {
+      if (key === this.selectedEmployee) {
+        this.selectedEmployeeEmail=value;
+      }
+    }
   }
 
-  get employeeIds(): string[] {
-    this.employeeDropDown = Array.from(Object.keys(this.map))
-    return this.employeeDropDown
-  }
-  sample() {
-    console.log(this.employeeIds)
-  }
-
-  filterEmployee(name) {
-    let arr = this.employeeIds.filter(
-      (employeeIds) => employeeIds.toLowerCase().indexOf(name.toLowerCase()) === 0
-    );
-
-    return arr.length ? arr : [{ name: 'No Item found', code: 'null' }];
-  }
-
-  onWriterChange($event){
-   console.log($event);
+  allotSeatForEmployee(){
+    if(this.selectedEmployee===undefined || this.selectedEmployee===null){
+      this.blankEmp=true;
+      return;
+    }
+    if(this.selectedSeatNumber===undefined||this.selectedSeatNumber===null){
+      this.blankSeat=true;
+      return;
+    }
+    this.wingService.allotSlotForEmployee(this.selectedEmployee,this.selectedSeatNumber);
   }
 
 }
+
+

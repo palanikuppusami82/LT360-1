@@ -32,4 +32,16 @@ getAllWings(){
   return this.http.get(`${environment.baseurl}api/wings/getAllWings`,this.httpOptions)
 } 
 
+allotSlotForEmployee(selectedEmployee:string,selectedSeatNumber:string){
+  this.http.post(`${environment.baseurl}api/wings/assignseat/employee/${selectedEmployee}/${selectedSeatNumber}`,'',this.httpOptions).subscribe(
+    {
+      error: () => {
+      console.error('exception occured')},
+      complete: () => {
+        window.location.reload()
+      } 
+    }
+  );
+}
+
 }

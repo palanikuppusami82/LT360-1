@@ -62,7 +62,7 @@ import { DragDropFileUploadDirective } from './draganddrop/drag-drop-file-upload
 import { LtdraganddropComponent } from './ltdraganddrop/ltdraganddrop.component';
 import { AssetmanagmentComponent } from './admin/assetmanagment/assetmanagment.component';
 import { MatStepperModule } from '@angular/material/stepper';
-
+import {NgSelectModule} from '@ng-select/ng-select';
 
 @NgModule({
   declarations: [
@@ -86,6 +86,7 @@ import { MatStepperModule } from '@angular/material/stepper';
      DragDropFileUploadDirective,
      LtdraganddropComponent,
      AssetmanagmentComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -129,6 +130,8 @@ import { MatStepperModule } from '@angular/material/stepper';
     NgApexchartsModule,
     MatAutocompleteModule,
     MatInputModule,
+    NgSelectModule,
+ 
   ],
   bootstrap: [AppComponent],
   providers: [MatDatepickerModule,BnNgIdleService,AdminComponent,
