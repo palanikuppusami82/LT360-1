@@ -9,10 +9,10 @@
        <li class="nav-item">
          <a class="nav-link" routerLink="/room">Rooms</a>
        </li>
-       <li class="nav-item">
+       <li class="nav-item"  *ngIf="isAdmin()">
+        <button (click)="openDialog()" class="btn btn-primary">Create Room</button>
        </li>
       <li class="nav-item" >
-      <button (click)="openDialog()" class="btn btn-primary">Create Room</button>
       <span class="example-spacer"></span>
       <button mat-icon-button [matMenuTriggerFor]="userMenu">
         <ngx-avatar size="40"name='{{currentUser.username}}'> </ngx-avatar>
@@ -32,5 +32,7 @@
      </ul>
   </nav>
 <router-outlet></router-outlet>
-<app-footer></app-footer>
 
+<ng-container *ngIf=" !isAdmin() || isAdmin() && !router.url.includes('admin')">
+  <app-footer></app-footer>
+  </ng-container>

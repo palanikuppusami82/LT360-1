@@ -15,7 +15,6 @@ import { CurrentuserserviceService } from './services/currentuserservice.service
 })
 export class AppComponent {
   title = 'ladera-services-frontend';
-
    declare currentUser: Employee;
    show: boolean = false; 
    role ='role_admin'; 
@@ -37,7 +36,7 @@ export class AppComponent {
          // console.log(this.usernameforlogin )
     }
 
-    get isAdmin() {
+     isAdmin() {
         return this.currentUser && this.currentUser.roles.includes(this.role);
     }
 
