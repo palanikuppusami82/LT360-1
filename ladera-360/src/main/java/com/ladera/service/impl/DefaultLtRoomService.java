@@ -33,13 +33,11 @@ public class DefaultLtRoomService implements RoomService {
 
 	@Override
 	public RoomData getRoom(String name) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public List<RoomData> getAllRooms() {
-		// TODO Auto-generated method stub
 		List<RoomData> reDatas = new ArrayList<>();
 		List<Room> roomModels = roomRepository.findAll();
 		if(CollectionUtils.isNotEmpty(roomModels)) {

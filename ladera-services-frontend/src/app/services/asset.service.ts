@@ -3,13 +3,13 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from '@environments/environment';
 import { Observable } from 'rxjs';
-import { Room } from '../room';
+import { Asset } from '../admin/asset/asset';
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class RoombookingserviceService {
+export class AssetService {
 
 
   currentuser: any
@@ -22,33 +22,23 @@ export class RoombookingserviceService {
      headers: this.headers_object
    };
 }
-public createRoom(room :Room){
-  console.log(room);
-  return this.http.post(`${environment.baseurl}api/room/createroom`,room,this.httpOptions).subscribe(
+public createAsset(room :Asset){
+
+  return this.http.post(`${environment.baseurl}api/asset/createAsset`,room,this.httpOptions).subscribe(
     {
       error: () => {
       console.error('exception occured')},
       complete: () => {
-        this.router.navigate(['/room']);
+        this.router.navigate(['/admin/assetmanagment']);
       } 
     }
   );
   
 }
 
-public getAllRooms(){
-  return this.http.get(`${environment.baseurl}api/room/getAllRooms`,this.httpOptions);
+public getAllAssets(){
+  return this.http.get(`${environment.baseurl}api/room/getAllAsset`,this.httpOptions);
 }
-  bookroom(bookingentries){ 
-  return this.http.post(`${environment.baseurl}booking/room`,bookingentries,this.httpOptions).subscribe(
-    {
-      error: () => {
-      console.error('exception occured')},
-      complete: () => {
-        this.router.navigate(['/registerationsuccess']);
-      } 
-    }
-  );
-}   
+ 
 
 }

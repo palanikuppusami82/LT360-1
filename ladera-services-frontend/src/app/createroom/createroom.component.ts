@@ -28,7 +28,7 @@ export class CreateroomComponent implements OnInit {
     private service : RoombookingserviceService, public router : Router,private formBuilder:FormBuilder,private wingService:WingserviceService ) { }
   roomCreateForm = new FormGroup({
     roomId: new FormControl(''),
-    roomName: new FormControl(''),
+    name: new FormControl(''),
     roomType : new FormControl(''),
     description: new FormControl(''),
     seatCapacity: new FormControl(''),

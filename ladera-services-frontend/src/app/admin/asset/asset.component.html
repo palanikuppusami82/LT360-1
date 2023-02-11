@@ -1,0 +1,104 @@
+<div class ="form-container" style="background-image: url(http://localhost:4200/assets/images/form-background-img.jpg);">
+  <div class="main-div" #maindiv>
+    <div class="col container" >
+  <mat-card>
+    <mat-card-title class ="legend-title" style="color:#FFBA00 ;">Asset Form</mat-card-title>
+    <div class="row">
+      <div class="col col-md-8" style=" max-height: 100vh">
+        <form [formGroup]="assetCreateForm"  #registerform="ngForm" (ngSubmit)="registerAsset()" >
+          <div class="row">
+          <div class=" col-sm-4 mb-3">
+            <label for="code" class="form-label">Asset Code</label>
+            <input
+              type="text"
+              class="form-control"
+              id="code"
+              [(ngModel)]="asset.code"
+              formControlName="code"
+              [ngClass]="{ 'is-invalid': submitted && f['code'].errors }"
+            />
+            <div *ngIf="submitted && f['code'].errors" class="invalid-feedback">
+              <div *ngIf="f['code'].errors['required']">Code is required</div>
+            </div>
+          </div>
+          <div class=" col-sm-4 mb-3">
+            <label for="description" class="form-label">Asset Description</label>
+            <input type="text"
+            class="form-control"
+            id="description"
+            maxlength="100"
+            [(ngModel)]="asset.description"
+            formControlName="description" 
+            [ngClass]="{ 'is-invalid': submitted && f['description'].errors }"
+            />
+            <div *ngIf="submitted && f['description'].errors" class="invalid-feedback">
+              <div *ngIf="f['description'].errors['required']">Description is required</div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class=" col-sm-4 mb-3">
+            <label for="warrantyPeriod" class="form-label">Warranty Period</label>
+            <input
+              type="text"
+              class="form-control"
+              id="warrantyPeriod"
+              [(ngModel)]="asset.warrantyPeriod"
+              formControlName="warrantyPeriod"
+              [ngClass]="{ 'is-invalid': submitted && f['warrantyPeriod'].errors }"
+            />
+          </div>
+          <div class=" col-sm-4 mb-3">
+            <label for="serialNumber" class="form-label">Serial Number</label>
+            <input type="text"
+            class="form-control"
+            id="serialNumber"
+            maxlength="100"
+            [(ngModel)]="asset.serialNumber"
+            formControlName="serialNumber" 
+            [ngClass]="{ 'is-invalid': submitted && f['serialNumber'].errors }"
+            />
+            <div *ngIf="submitted && f['serialNumber'].errors" class="invalid-feedback">
+              <div *ngIf="f['serialNumber'].errors['required']">Serial Number is required</div>
+            </div>
+          </div>
+        </div>
+        
+        <br style="clear:both;"/>
+          <div>
+          <div class="ngb-timepicker-end" style="width: 60%; float:left">
+          <label for="assetType">Asset Type</label>
+          <select class="input-field" name="assetType" [(ngModel)]="asset.assetType"
+                formControlName="assetType" id="assetType" [ngClass]="{ 'is-invalid': submitted && f['assetType'].errors }">
+                <option>Select</option>
+                <option value="Laptop">Laptop</option>
+                <option value="Headphone">Headphone</option>
+                <option value="Mouse">Mouse</option>
+                <option value="Keyboard">Keyboard</option>
+                </select>
+          <div *ngIf="submitted && f['assetType'].errors" class="invalid-feedback">
+            <div *ngIf="f['assetType'].errors['required']">Asset Type should not be empty</div>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+                <p *ngIf="hasError" class="clearfix error-message">
+                  <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> {{errMessage}}</p>
+      </div>
+      <div class="container-lt-draganddrop">
+        <app-drag-drop></app-drag-drop>
+      </div>
+        <br style="clear:both;"/>
+          <div>
+            <button type="submit" class="btn btn-primary btn-room" >Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </mat-card>
+  </div>
+  <div   class="col container-table">
+    
+    </div>
+  </div>
+  </div>
+  

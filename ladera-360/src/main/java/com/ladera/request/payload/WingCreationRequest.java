@@ -1,5 +1,7 @@
 package com.ladera.request.payload;
 
+import com.ladera.model.data.WingSlotEntriesData;
+
 public class WingCreationRequest {
 	
 	private String wingCode;
@@ -7,6 +9,9 @@ public class WingCreationRequest {
 	private String wingName;
 
 	private int wingCapacity;
+	
+	private WingSlotEntriesData wingSlotEntriesData;
+	
 
 	public String getWingCode() {
 		return wingCode;

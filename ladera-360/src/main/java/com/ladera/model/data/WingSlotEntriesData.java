@@ -15,6 +15,16 @@ public class WingSlotEntriesData  implements Serializable{
 
 	private int wingCapacity;
 	
+	private int availableCapacity;
+	
+	public int getAvailableCapacity() {
+		return availableCapacity;
+	}
+
+	public void setAvailableCapacity(int availableCapacity) {
+		this.availableCapacity = availableCapacity;
+	}
+
 	private Map<String,String> unAssignedEmployeeMap;
 
 

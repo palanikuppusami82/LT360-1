@@ -33,7 +33,7 @@ export class WingallotmentComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.wingService.getSlots('wing7').subscribe((data:any) =>{
+    this.wingService.getSlots('WT-001').subscribe((data:any) =>{
      this.slot=data;
      this.map  = this.slot.unAssignedEmployeeMap;
      console.log(this.slot.unAssignedEmployeeMap);
