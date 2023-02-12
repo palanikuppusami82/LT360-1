@@ -10,9 +10,8 @@ import { AdminComponent } from '../admin.component';
 })
 export class AdminhomeComponent implements OnInit {
 
-  wings: Wing[] = [
-  ];
- 
+  wings: Wing[] = [];
+  percentagevalue!: number;
   constructor(private adminComponent : AdminComponent,private service : WingserviceService 
     ) { 
       this.adminComponent.showDashboardComponent=false;
@@ -21,8 +20,11 @@ export class AdminhomeComponent implements OnInit {
   ngOnInit(): void {
     this.service.getAllWings().subscribe( (data:any) =>{
       this.wings=data;
-    
      });
+  }
+
+  updateValue(progressValue:any,totalValue:any ){
+  return (progressValue * 100)/totalValue;
   }
 
 }
