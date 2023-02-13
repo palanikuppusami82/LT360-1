@@ -26,6 +26,6 @@ export class RoomComponent implements OnInit {
   }
 
   public gotoRoomBooking(id: string) {
-    this.router.navigate(['/roombooking',id], { state: { roomId: id }});
+    this.router.navigate(['/roombooking'],{ queryParams: { roomId: id}});
   }
 }
