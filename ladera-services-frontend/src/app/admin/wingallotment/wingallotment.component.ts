@@ -6,6 +6,7 @@ import { AdminComponent } from '../admin.component';
 import { AfterViewInit, OnDestroy, ViewChild } from '@angular/core';
 import {  ReplaySubject, Subject, take, takeUntil } from 'rxjs';
 import { MatInput } from '@angular/material/input';
+import { ActivatedRoute } from '@angular/router';
 
 export interface EmployeeContainer {
   employeeCode: string;
@@ -42,6 +43,7 @@ export class WingallotmentComponent implements OnInit, AfterViewInit, OnDestroy 
  imageName!: String
  blankEmp!:boolean
  blankSeat!:boolean
+ wingCode!:string;
 
    /** control for the selected bank */
 public bankCtrl: FormControl = new FormControl();
@@ -56,16 +58,22 @@ public bankFilterCtrl: FormControl = new FormControl();
 
 /** Subject that emits when the component has been destroyed. */
 protected _onDestroy = new Subject<void>();
-  constructor(private adminComponent : AdminComponent, private wingService:WingserviceService){
+  constructor(private adminComponent : AdminComponent, private wingService:WingserviceService,private route: ActivatedRoute){
     this.adminComponent.showDashboardComponent=false;
     this.empId = new FormControl();
   }
 
+
+
   ngOnInit(): void {
     let  result : EmployeeContainer[] = [];
     let  seatarray : SeatContainer[] = [];
-    //this.imageName=""
-    this.wingService.getSlots('wing7').subscribe((data:any) =>{
+    this.route.queryParams.subscribe(
+      params => {
+        this.wingCode =  params['wingCode'];
+      }
+    )   
+    this.wingService.getSlots(this.wingCode).subscribe((data:any) =>{
      this.slot=data;
      this.map  = this.slot.unAssignedEmployeeMap;
      Object.keys(this.map).forEach( (value) =>{

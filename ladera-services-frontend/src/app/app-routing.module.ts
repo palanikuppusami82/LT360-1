@@ -9,16 +9,18 @@ import { AuthGuard } from './guards/auth.guard';
 import { SuccessfulpageComponent } from './successfulpage/successfulpage.component';
 import { CreateroomComponent } from './createroom/createroom.component';
 import { ProfileComponent } from './profile/profile.component';
+import { BookingconfirmationComponent } from './bookingconfirmation/bookingconfirmation.component';
 
 const routes: Routes = [
   {path:'',redirectTo:'home',pathMatch:'full'},
   {path: 'home', component: HomeComponent,canActivate : [AuthGuard]},{path: 'login', component: LoginComponent},
   {path: 'register', component: RegistrationComponent},
   {path: 'room', component: RoomComponent, canActivate : [AuthGuard]},
-  {path: 'roombooking/:id', component: RoombookingComponent, canActivate : [AuthGuard]},
+  {path: 'roombooking', component: RoombookingComponent, canActivate : [AuthGuard]},
   {path: 'createroom', component: CreateroomComponent, canActivate : [AuthGuard]},
   {path: 'registerationsuccess', component: SuccessfulpageComponent},
-  {path: 'userprofile', component: ProfileComponent}
+  {path: 'userprofile', component: ProfileComponent},
+  {path:'bookingconfirmation', component:BookingconfirmationComponent}
 
 ];
 @NgModule({

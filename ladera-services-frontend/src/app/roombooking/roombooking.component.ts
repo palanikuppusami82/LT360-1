@@ -4,7 +4,8 @@ import { Time } from '../model/time';
 import { DatePipe, Location } from '@angular/common';
 import { Bookedroomentries } from '../model/bookedroomentries.model';
 import { RoombookingserviceService } from '../services/roombookingservice.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
@@ -13,7 +14,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./roombooking.component.css']
 })
 export class RoombookingComponent implements OnInit {
-  
 
   public changedStartTime:string
   public changedEndTime:string
@@ -39,11 +39,8 @@ export class RoombookingComponent implements OnInit {
 
 
 
-  constructor(private router: Router,private location: Location,private formBuilder: FormBuilder, private roombookingserviceService : RoombookingserviceService ) {
-    const state = this.location.getState() as {
-     roomId:String 
-    } 
-    this.formIdData = state.roomId;
+  constructor(private router: Router,private location: Location,private formBuilder: FormBuilder, private roombookingserviceService : RoombookingserviceService,private modalService: NgbModal,private route: ActivatedRoute ) {
+ 
     }
  
   roomBookingForm = new FormGroup({
@@ -69,6 +66,14 @@ export class RoombookingComponent implements OnInit {
         endTime:['',Validators.required]
       }
     );
+    const state = this.location.getState() as {
+      roomId:String 
+     } 
+     this.route.queryParams.subscribe(
+      params => {
+        this.formIdData =  params['roomId'];
+      }
+    )
   } 
 
   get f(): { [key: string]: AbstractControl } {
@@ -107,7 +112,7 @@ export class RoombookingComponent implements OnInit {
   this.empId = this.currentuser.id
   this.desc = this.roomBookingForm.get('discription')?.value!;
   this.emailId = this.roomBookingForm.get('emailId')?.value!;
-  const roomRequest = new Bookedroomentries(this.formIdData,this.selecteddate,this.changedStartTime,this.changedEndTime,this.desc,this.emailId,this.empId);
+   const roomRequest = new Bookedroomentries(this.formIdData,this.selecteddate,this.changedStartTime,this.changedEndTime,this.desc,this.emailId,this.empId);
   this.roombookingserviceService.bookroom(roomRequest);
 }
   dateChangeHandler(date: Date){
@@ -154,5 +159,6 @@ carouselImages = [
   {path: 'http://localhost:4200/assets/images/meetingroom-2.jpg'},
   {path: 'http://localhost:4200/assets/images/meetingroom-3.jpg'},
 ]
+
 
 }

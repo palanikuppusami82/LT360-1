@@ -21,7 +21,7 @@ export class TaskComponent implements OnInit {
   rolesList = [
     {
       id: 1,
-      role: 'role_employee'
+      role: 'role_user'
     },
     {
       id: 2,

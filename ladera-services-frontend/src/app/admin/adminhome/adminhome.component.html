@@ -1,9 +1,8 @@
 <div class="container mt-5 mb-3">
     <mat-grid-list cols="3" rowHeight="320px" [gutterSize]="'10px'">
     <mat-grid-tile  class= "mat-title-custom"*ngFor="let wing of wings">
-    <mat-card class="custom" class="mat-title-card">
+    <mat-card class="custom" class="mat-title-card" (click)="travelToWingAllotment(wing.wingCode)">
       <mat-card-content class="mat-title-content">
-            <a href="admin/wingallotment" class="stretched-link"></a>
             <div class="d-flex justify-content-between">
                 <div class="d-flex flex-row align-items-center">
                     <div class="icon"><img height="24" class="thumbnail-image" src="assets/images/plain-Lt-logo.png"></div>
