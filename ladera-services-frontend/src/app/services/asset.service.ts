@@ -37,7 +37,7 @@ public createAsset(room :Asset){
 }
 
 public getAllAssets(){
-  return this.http.get(`${environment.baseurl}api/room/getAllAsset`,this.httpOptions);
+  return this.http.get(`${environment.baseurl}api/asset/getAllAsset`,this.httpOptions);
 }
  
 

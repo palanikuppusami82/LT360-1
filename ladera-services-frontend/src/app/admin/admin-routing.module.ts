@@ -6,6 +6,7 @@ import { TaskComponent } from './task/task.component';
 import { AuthGuard } from '../guards/auth.guard';
 import { WingallotmentComponent } from './wingallotment/wingallotment.component';
 import { AssetmanagmentComponent } from './assetmanagment/assetmanagment.component';
+import { AssetComponent } from './asset/assest.component';
 
 
 const appRoutes: Routes = [
@@ -31,6 +32,10 @@ const appRoutes: Routes = [
               },{
                 path: 'assetmanagment',
                 component: AssetmanagmentComponent,
+                canActivate : [AuthGuard],
+              },{
+                path: 'createasset',
+                component: AssetComponent,
                 canActivate : [AuthGuard],
               }
         ]

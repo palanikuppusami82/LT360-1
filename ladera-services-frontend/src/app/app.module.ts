@@ -63,6 +63,7 @@ import { LtdraganddropComponent } from './ltdraganddrop/ltdraganddrop.component'
 import { AssetmanagmentComponent } from './admin/assetmanagment/assetmanagment.component';
 import { MatStepperModule } from '@angular/material/stepper';
 import {NgSelectModule} from '@ng-select/ng-select';
+import { AssetComponent } from './admin/asset/assest.component';
 
 @NgModule({
   declarations: [
@@ -86,6 +87,7 @@ import {NgSelectModule} from '@ng-select/ng-select';
      DragDropFileUploadDirective,
      LtdraganddropComponent,
      AssetmanagmentComponent,
+     AssetComponent
 
   ],
   imports: [
