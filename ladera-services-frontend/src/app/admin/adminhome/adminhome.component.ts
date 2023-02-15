@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { WingserviceService } from 'src/app/services/wingservice.service';
 import { Wing } from 'src/app/wing';
 import { AdminComponent } from '../admin.component';
@@ -10,10 +11,9 @@ import { AdminComponent } from '../admin.component';
 })
 export class AdminhomeComponent implements OnInit {
 
-  wings: Wing[] = [
-  ];
- 
-  constructor(private adminComponent : AdminComponent,private service : WingserviceService 
+  wings: Wing[] = [];
+  percentagevalue!: number;
+  constructor(private router: Router,private adminComponent : AdminComponent,private service : WingserviceService 
     ) { 
       this.adminComponent.showDashboardComponent=false;
     }
@@ -21,8 +21,15 @@ export class AdminhomeComponent implements OnInit {
   ngOnInit(): void {
     this.service.getAllWings().subscribe( (data:any) =>{
       this.wings=data;
-    
      });
+  }
+
+  updateValue(progressValue:any,totalValue:any ){
+  return (progressValue * 100)/totalValue;
+  }
+
+  travelToWingAllotment(code){
+    this.router.navigate(['admin/wingallotment'],{ queryParams: { wingCode: code}});
   }
 
 }

@@ -28,7 +28,7 @@ public class Employee {
 	@Column(name = "id")
 	private Long id;
 
-	@Column(name = "emp_code")
+	@Column(name = "emp_code",unique = true)
 	private String empId;
 
 	@Column(name = "first_name")
@@ -37,7 +37,7 @@ public class Employee {
 	@Column(name = "last_name")
 	private String lastName;
 
-	@Column(name = "mobile_number")
+	@Column(name = "mobile_number",unique = true)
 	private String mobileNumber;
 
 	@Column(name = "email_id", nullable = false, unique = true)
